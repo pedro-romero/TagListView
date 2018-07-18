@@ -10,6 +10,7 @@ import UIKit
 
 @IBDesignable
 open class TagView: UIButton {
+    open var leftImage: UIImageView = UIImageView()
 
     @IBInspectable open var cornerRadius: CGFloat = 0 {
         didSet {
@@ -173,6 +174,8 @@ open class TagView: UIButton {
         frame.size = intrinsicContentSize
         addSubview(removeButton)
         removeButton.tagView = self
+        leftImage.contentMode = .scaleAspectFit
+        addSubview(leftImage)
         
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(self.longPress))
         self.addGestureRecognizer(longPress)
@@ -194,6 +197,14 @@ open class TagView: UIButton {
         if enableRemoveButton {
             size.width += removeButtonIconSize + paddingX
         }
+        var newFrame = leftImage.frame
+        newFrame.size.height = self.frame.size.height - (paddingY*2)
+        newFrame.size.width = newFrame.size.height
+        newFrame.origin.x = paddingX
+        newFrame.origin.y = paddingY
+        leftImage.frame = newFrame
+        size.width += leftImage.frame.size.width + paddingX
+        titleEdgeI
         return size
     }
     
