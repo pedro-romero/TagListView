@@ -204,7 +204,7 @@ open class TagView: UIButton {
         newFrame.origin.y = paddingY
         leftImage.frame = newFrame
         size.width += leftImage.frame.size.width + paddingX
-        titleEdgeI
+        titleEdgeInsets.left = paddingX  + newFrame.size.width + paddingX
         return size
     }
     
